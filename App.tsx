@@ -5,12 +5,51 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// importing Screens
+
+import Home from './screens/Home';
+import Details from './screens/Details';
+
+// params
+export type RootStackParamList = {
+  Home: undefined;
+  Details: {product:Product};
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+     <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen 
+        name="Home" 
+        component={Home}
+        options={{
+          title: 'Trending Products',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            fontWeight: 'bold',
+          },
+        }}  />
+        <Stack.Screen 
+        name="Details" 
+        component={Details}
+        options={{
+          title: 'Products details',
+          headerStyle: {
+            backgroundColor: '#f451ve',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle:{
+            fontWeight: 'bold',
+          },
+        }}/>
+      </Stack.Navigator>
+     </NavigationContainer>
   );
 }
 
