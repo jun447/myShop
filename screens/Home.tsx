@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList,Pressable } from 'react-native'
 import React from 'react'
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
@@ -21,12 +21,17 @@ const Home = ({navigation}:HomeProps) => {
             data={PRODUCTS_LIST}
             keyExtractor={(item)=>item.id}
             renderItem={({item})=>(
-            <ProductItem 
-                product={item}
-                //onPress={()=>navigation.navigate('Details',{product:item})}
-            />
+            <Pressable 
+                onPress={()=>navigation.navigate('Details',{product:item})}
+                
+            >
+                <ProductItem 
+                    product={item}
+                />
+            </Pressable>
             )}
-            ItemSeparatorComponent={()=><Separator/>}
+            // ItemSeparatorComponent={()=><Separator/>}
+            ItemSeparatorComponent={Separator}
         />
     </View>
   )
